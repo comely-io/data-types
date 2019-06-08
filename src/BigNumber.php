@@ -34,6 +34,15 @@ class BigNumber
     private $triggerUpdateSelf;
 
     /**
+     * @param Base16 $hexits
+     * @return BigNumber
+     */
+    public static function fromBase16(Base16 $hexits): self
+    {
+        return new self(BcMath::Decode($hexits->hexits(false)));
+    }
+
+    /**
      * BigNumber constructor.
      * @param null $num
      */
