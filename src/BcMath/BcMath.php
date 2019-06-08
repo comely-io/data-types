@@ -23,6 +23,49 @@ use Comely\DataTypes\BigNumber;
 class BcMath
 {
     /**
+     * Encodes/converts integral numbers (Integer or strings comprised of integral numbers) from Base10 to Base16/Hexadecimal
+     * If resulting hexits are not even, this method will prefix "0" to even out
+     * @param $decs
+     * @param bool $prefixed
+     * @return string
+     */
+    public static function Encode($decs, bool $prefixed = false): string
+    {
+        if (is_int($decs)) {
+            $decs = strval($decs);
+        }
+
+        if (!is_string($decs) || !preg_match('/^(0|[1-9]+[0-9]*)$/', $decs)) {
+            throw new \InvalidArgumentException('First argument must be an integral number');
+        }
+
+        $hexits = BaseConvert::fromBase10(new BigNumber($decs), BaseConvert::CHARSET_BASE16);
+        if (strlen($hexits) % 2 !== 0) {
+            $hexits = "0" . $hexits; // Even-out resulting hexits
+        }
+
+        return $prefixed ? "0x" . $hexits : $hexits;
+    }
+
+    /**
+     * Converts/decodes from hexadecimals to Base10/decimals
+     * @param string $hexits
+     * @return string
+     */
+    public static function Decode(string $hexits): string
+    {
+        if (!preg_match('/^(0x)?[a-f0-9]+$/i', $hexits)) {
+            throw new \InvalidArgumentException('Only hexadecimal numbers can be decoded');
+        }
+
+        if (substr($hexits, 0, 2) === "0x") {
+            $hexits = substr($hexits, 2);
+        }
+
+        return BaseConvert::toBase10String($hexits, BaseConvert::CHARSET_BASE16, false);
+    }
+
+    /**
      * Convert arbitrary number between bases
      * @param string $value
      * @param int $fromBase
