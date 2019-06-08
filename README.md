@@ -49,6 +49,7 @@ Method | Arguments | Returns | Description
 difference | <ul><li>`int` $stamp1</li><li>`int`/`NULL` $stamp2</li></ul> | `int` | Returns difference between 2 timestamps (number of seconds) from givens timestamps. If second argument is NULL, then current timestamp using `time()` func is used.
 minutesDifference | <ul><li>`int` $stamp1</li><li>`int`/`NULL` $stamp2</li></ul> | `float` | Returns minutes difference between 2 timestamps, returns float with 1 digit after decimal point.
 hoursDifference | <ul><li>`int` $stamp1</li><li>`int`/`NULL` $stamp2</li></ul> | `float` | Returns hours difference between 2 timestamps, returns float with 1 digit after decimal point.
+unitsToSeconds | <ul><li>`string` $units</li></ul> | `int` | Converts a string representing a time, for example "1h 30m" to 5400 (number of seconds). This may be used to convert values like "1d 12h 45m" and etc...
 
 
 
