@@ -31,11 +31,11 @@ BigNumber objects via BcMath and several helper functions that are essential for
 
 ## Helpers
 
-### Comely\DataTypes\Strings
+### `Comely\DataTypes\Strings`
 Method | Arguments | Returns | Description
 --- | --- | --- | ---
-asciiEncode | `string` $ascii | `Base16` | Encodes ASCII string (ISO-8859 or Windows 1252 charset) into Hexadecimal (Base16) representation
-asciiDecode | `Base16` $hex | `string` | Decodes Hexadecimal/Base16 object and returns ASCII string
+asciiEncode | <ul><li>`string` $ascii</li></ul> | `Base16` | Encodes ASCII string (ISO-8859 or Windows 1252 charset) into Hexadecimal (Base16) representation
+asciiDecode | <ul><li>`Base16` $hex</li></ul> | `string` | Decodes Hexadecimal/Base16 object and returns ASCII string
 
 
 ### `Comely\DataTypes\Integers`
