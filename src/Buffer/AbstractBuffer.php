@@ -100,7 +100,7 @@ abstract class AbstractBuffer implements \Serializable
         $dataSize = intval($splits[1]);
 
         // Construct object
-        $this->readOnly = intval($splits[0]) === "1" ? true : false;
+        $this->readOnly = false;
         $this->data = "";
         $this->len = 0;
         $this->size = 0;
@@ -110,6 +110,9 @@ abstract class AbstractBuffer implements \Serializable
         if ($this->size !== $dataSize) {
             throw new \UnexpectedValueException('Serialized data size does not match');
         }
+
+        // ReadOnly flag
+        $this->readOnly = intval($splits[0]) === "1" ? true : false;
     }
 
     /**
