@@ -54,8 +54,10 @@ class Base16 extends AbstractBuffer
      */
     public function __debugInfo(): array
     {
-        $info = parent::__debugInfo();
-        return array_merge(["data" => $this->hexits()], $info);
+        return [
+            "data" => $this->hexits(false),
+            "len" => $this->len()
+        ];
     }
 
     /**

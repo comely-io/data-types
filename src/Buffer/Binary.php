@@ -41,8 +41,11 @@ class Binary extends AbstractBuffer
      */
     public function __debugInfo(): array
     {
-        $info = parent::__debugInfo();
-        return array_merge(["data" => "0x" . bin2hex($this->raw())], $info);
+        return [
+            "data" => "0x" . bin2hex($this->raw()),
+            "size" => $this->size()->bytes(),
+            "bits" => $this->size()->bits()
+        ];
     }
 
     /**
