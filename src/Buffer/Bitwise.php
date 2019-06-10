@@ -37,6 +37,15 @@ class Bitwise extends AbstractBuffer
     }
 
     /**
+     * @return array
+     */
+    public function __debugInfo(): array
+    {
+        $info = parent::__debugInfo();
+        return array_merge(["data" => $this->value() ?? ""], $info);
+    }
+
+    /**
      * @return Base16
      */
     public function base16(): Base16

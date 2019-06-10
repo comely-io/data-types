@@ -20,7 +20,7 @@ namespace Comely\DataTypes\Buffer;
  * @property-read int $sizeInBytes
  * @property-read int $length
  */
-abstract class AbstractBuffer
+abstract class AbstractBuffer implements \Serializable
 {
     /** @var string */
     private $data;
@@ -46,6 +46,17 @@ abstract class AbstractBuffer
     }
 
     /**
+     * @return array
+     */
+    public function __debugInfo(): array
+    {
+        return [
+            "len" => $this->len,
+            "size" => $this->size
+        ];
+    }
+
+    /**
      * @param $prop
      * @return int
      */
@@ -59,6 +70,46 @@ abstract class AbstractBuffer
         }
 
         throw new \OutOfBoundsException('Cannot get value of inaccessible property');
+    }
+
+    /**
+     * @return string
+     */
+    public function serialize(): string
+    {
+        // Read only?
+        return sprintf(
+            '%d:%d:%s',
+            $this->readOnly === true ? 1 : 0,
+            $this->size,
+            base64_encode($this->data)
+        );
+    }
+
+    /**
+     * @param string $serialized
+     */
+    public function unserialize($serialized)
+    {
+        // int readOnly + ":" + strlen( data ) + ":" + base64(data)
+        if (!is_string($serialized) || !preg_match('/^[0-1]{1}\:[0-9]+\:[a-z0-9\+\/]+={0,2}$/i', $serialized)) {
+            throw new \InvalidArgumentException('Serialized data mismatch');
+        }
+
+        $splits = explode(":", $serialized);
+        $dataSize = intval($splits[1]);
+
+        // Construct object
+        $this->readOnly = intval($splits[0]) === "1" ? true : false;
+        $this->data = "";
+        $this->len = 0;
+        $this->size = 0;
+
+        // Restore data
+        $this->set(base64_decode($splits[2]));
+        if ($this->size !== $dataSize) {
+            throw new \UnexpectedValueException('Serialized data size does not match');
+        }
     }
 
     /**

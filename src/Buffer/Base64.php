@@ -41,6 +41,15 @@ class Base64 extends AbstractBuffer
     }
 
     /**
+     * @return array
+     */
+    public function __debugInfo(): array
+    {
+        $info = parent::__debugInfo();
+        return array_merge(["data" => $this->encoded()], $info);
+    }
+
+    /**
      * @return string
      */
     public function encoded(): string
