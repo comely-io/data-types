@@ -21,6 +21,28 @@ namespace Comely\DataTypes;
 class OOP
 {
     /**
+     * @param $val
+     * @return bool
+     */
+    public static function isValidClass($val): bool
+    {
+        return self::isValidClassName($val) && class_exists($val) ? true : false;
+    }
+
+    /**
+     * @param $val
+     * @return bool
+     */
+    public static function isValidClassName($val): bool
+    {
+        if (is_string($val) && preg_match('/^\w+(\\\\\w+)*$/', $val)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Return base/short class name
      * @param string $class
      * @return string
