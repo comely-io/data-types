@@ -12,21 +12,22 @@
 
 declare(strict_types=1);
 
-namespace Comely\DataTypes;
+namespace Comely\DataTypes\Strings;
 
 use Comely\DataTypes\Buffer\Base16;
+use Comely\DataTypes\DataTypes;
 
 /**
- * Class Strings
- * @package Comely\DataTypes
+ * Class ASCII
+ * @package Comely\DataTypes\Strings
  */
-class Strings
+class ASCII
 {
     /**
      * @param string $ascii
      * @return Base16
      */
-    public static function asciiEncode(string $ascii): Base16
+    public static function base16Encode(string $ascii): Base16
     {
         if (DataTypes::isUtf8($ascii)) {
             throw new \InvalidArgumentException('Cannot encode UTF-8 string into hexadecimals');
@@ -44,7 +45,7 @@ class Strings
      * @param Base16 $hex
      * @return string
      */
-    public static function asciiDecode(Base16 $hex): string
+    public static function base16Decode(Base16 $hex): string
     {
         $hex = $hex->hexits();
         $str = "";
