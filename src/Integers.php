@@ -26,7 +26,7 @@ class Integers
      * @param int $to
      * @return bool
      */
-    public function Range(int $num, int $from, int $to): bool
+    public static function Range(int $num, int $from, int $to): bool
     {
         return ($num >= $from && $num <= $to) ? true : false;
     }
