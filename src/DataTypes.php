@@ -23,9 +23,9 @@ use Comely\DataTypes\BcMath\BcMath;
 class DataTypes
 {
     /** string Version (Major.Minor.Release-Suffix) */
-    public const VERSION = "1.0.21";
+    public const VERSION = "1.0.22";
     /** int Version (Major * 10000 + Minor * 100 + Release) */
-    public const VERSION_ID = 10021;
+    public const VERSION_ID = 10022;
 
     /**
      * Checks is string is comprised of only 1s and 0s
