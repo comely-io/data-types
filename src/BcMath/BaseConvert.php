@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace Comely\DataTypes\BcMath;
 
-use Comely\DataTypes\BigNumber;
+use Comely\DataTypes\BcNumber;
 
 /**
  * Class BaseConvert
@@ -53,11 +53,11 @@ class BaseConvert
     }
 
     /**
-     * @param BigNumber $dec
+     * @param BcNumber $dec
      * @param string $charset
      * @return string
      */
-    public static function fromBase10(BigNumber $dec, string $charset): string
+    public static function fromBase10(BcNumber $dec, string $charset): string
     {
         if (!$dec->isInteger() || $dec->isNegative()) {
             throw new \InvalidArgumentException('First argument must be a positive integer');
@@ -94,11 +94,11 @@ class BaseConvert
      * @param string $encoded
      * @param string $charset
      * @param bool $isCaseSensitive
-     * @return BigNumber
+     * @return BcNumber
      */
-    public static function toBase10(string $encoded, string $charset, bool $isCaseSensitive = true): BigNumber
+    public static function toBase10(string $encoded, string $charset, bool $isCaseSensitive = true): BcNumber
     {
-        return new BigNumber(self::toBase10String($encoded, $charset, $isCaseSensitive));
+        return new BcNumber(self::toBase10String($encoded, $charset, $isCaseSensitive));
     }
 
     /**

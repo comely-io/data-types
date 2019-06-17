@@ -15,11 +15,11 @@ declare(strict_types=1);
 namespace Comely\DataTypes\Buffer\Base16;
 
 use Comely\DataTypes\BcMath\BcMath;
-use Comely\DataTypes\BigNumber;
+use Comely\DataTypes\BcNumber;
 use Comely\DataTypes\Buffer\Base16;
 use Comely\DataTypes\Buffer\Binary;
 use Comely\DataTypes\Buffer\Bitwise;
-use Comely\DataTypes\Strings;
+use Comely\DataTypes\Strings\ASCII;
 
 /**
  * Class Decoder
@@ -40,17 +40,17 @@ class Decoder
     }
 
     /**
-     * @return BigNumber
+     * @return BcNumber
      */
-    public function base10(): BigNumber
+    public function base10(): BcNumber
     {
-        return BigNumber::fromBase16($this->buffer);
+        return BcNumber::fromBase16($this->buffer);
     }
 
     /**
-     * @return BigNumber
+     * @return BcNumber
      */
-    public function int(): BigNumber
+    public function int(): BcNumber
     {
         return $this->base10();
     }
@@ -60,7 +60,7 @@ class Decoder
      */
     public function ascii(): string
     {
-        return Strings::asciiDecode($this->buffer);
+        return ASCII::base16Decode($this->buffer);
     }
 
     /**

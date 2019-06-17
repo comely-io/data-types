@@ -14,7 +14,7 @@ declare(strict_types=1);
 
 namespace Comely\DataTypes\BcMath;
 
-use Comely\DataTypes\BigNumber;
+use Comely\DataTypes\BcNumber;
 
 /**
  * Class BcMath
@@ -39,7 +39,7 @@ class BcMath
             throw new \InvalidArgumentException('First argument must be an integral number');
         }
 
-        $hexits = BaseConvert::fromBase10(new BigNumber($decs), BaseConvert::CHARSET_BASE16);
+        $hexits = BaseConvert::fromBase10(new BcNumber($decs), BaseConvert::CHARSET_BASE16);
         if (strlen($hexits) % 2 !== 0) {
             $hexits = "0" . $hexits; // Even-out resulting hexits
         }
@@ -86,7 +86,7 @@ class BcMath
 
         // No need to convert to decimals (Base10) if it already is Base10
         $decs = $fromBase === 10 ?
-            new BigNumber($value) : BaseConvert::toBase10($value, BaseConvert::Charset($fromBase), $fromBaseIsCaseSensitive);
+            new BcNumber($value) : BaseConvert::toBase10($value, BaseConvert::Charset($fromBase), $fromBaseIsCaseSensitive);
 
         return $targetBase === 10 ? $decs->value() : BaseConvert::fromBase10($decs, BaseConvert::Charset($targetBase));
     }
@@ -97,12 +97,12 @@ class BcMath
      * argument is a valid number (of any data type)
      *
      * @param $num
-     * @return BigNumber|null
+     * @return BcNumber|null
      */
-    public static function isNumeric($num): ?BigNumber
+    public static function isNumeric($num): ?BcNumber
     {
         try {
-            return new BigNumber($num);
+            return new BcNumber($num);
         } catch (\Exception $e) {
         }
 
@@ -117,7 +117,7 @@ class BcMath
     public static function Value($num): string
     {
         // Instances of self are obviously valid numbers
-        if ($num instanceof BigNumber) {
+        if ($num instanceof BcNumber) {
             return $num->value();
         }
 

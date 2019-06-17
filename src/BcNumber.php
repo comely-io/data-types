@@ -19,10 +19,10 @@ use Comely\DataTypes\BcMath\BcMath;
 use Comely\DataTypes\Buffer\Base16;
 
 /**
- * Class BigNumber
+ * Class BcNumber
  * @package Comely\DataTypes
  */
-class BigNumber
+class BcNumber
 {
     /** @var null|int */
     private $scale;
@@ -35,7 +35,7 @@ class BigNumber
 
     /**
      * @param Base16 $hexits
-     * @return BigNumber
+     * @return BcNumber
      */
     public static function fromBase16(Base16 $hexits): self
     {
@@ -43,7 +43,7 @@ class BigNumber
     }
 
     /**
-     * BigNumber constructor.
+     * BcNumber constructor.
      * @param null $num
      */
     public function __construct($num = null)
@@ -74,7 +74,7 @@ class BigNumber
 
     /**
      * @param int $scale
-     * @return BigNumber
+     * @return BcNumber
      */
     public function scale(int $scale): self
     {
@@ -88,7 +88,7 @@ class BigNumber
 
     /**
      * @param int $retain
-     * @return BigNumber
+     * @return BcNumber
      */
     public function trim(int $retain = 0): self
     {
@@ -277,7 +277,7 @@ class BigNumber
     /**
      * @param $num
      * @param int|null $scale
-     * @return BigNumber
+     * @return BcNumber
      */
     public function add($num, ?int $scale = null): self
     {
@@ -288,7 +288,7 @@ class BigNumber
     /**
      * @param $num
      * @param int|null $scale
-     * @return BigNumber
+     * @return BcNumber
      */
     public function sub($num, ?int $scale = null): self
     {
@@ -299,7 +299,7 @@ class BigNumber
     /**
      * @param $num
      * @param int|null $scale
-     * @return BigNumber
+     * @return BcNumber
      */
     public function mul($num, ?int $scale = null): self
     {
@@ -311,7 +311,7 @@ class BigNumber
      * @param int $base
      * @param int $exponent
      * @param int|null $scale
-     * @return BigNumber
+     * @return BcNumber
      */
     public function mulPow(int $base, int $exponent, ?int $scale = null): self
     {
@@ -331,7 +331,7 @@ class BigNumber
     /**
      * @param $num
      * @param int|null $scale
-     * @return BigNumber
+     * @return BcNumber
      */
     public function divide($num, ?int $scale = null): self
     {
@@ -342,7 +342,7 @@ class BigNumber
     /**
      * @param $num
      * @param int|null $scale
-     * @return BigNumber
+     * @return BcNumber
      */
     public function pow($num, ?int $scale = null): self
     {
@@ -353,7 +353,7 @@ class BigNumber
     /**
      * @param $divisor
      * @param int|null $scale
-     * @return BigNumber
+     * @return BcNumber
      */
     public function mod($divisor, ?int $scale = null): self
     {
@@ -364,7 +364,7 @@ class BigNumber
     /**
      * @param $divisor
      * @param int|null $scale
-     * @return BigNumber
+     * @return BcNumber
      */
     public function remainder($divisor, ?int $scale = null): self
     {
@@ -372,7 +372,7 @@ class BigNumber
     }
 
     /**
-     * @return BigNumber
+     * @return BcNumber
      */
     public function copy(): self
     {
@@ -382,7 +382,7 @@ class BigNumber
 
     /**
      * Next 1 calculation will update value of same instance, result will NOT create new instance of BigNumber
-     * @return BigNumber
+     * @return BcNumber
      */
     public function update(): self
     {
@@ -400,7 +400,7 @@ class BigNumber
 
     /**
      * @param string $new
-     * @return BigNumber
+     * @return BcNumber
      */
     private function result(string $new): self
     {
