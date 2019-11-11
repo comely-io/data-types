@@ -35,7 +35,7 @@ class ASCII
 
         $hex = "";
         for ($i = 0; $i < strlen($ascii); $i++) {
-            $hex .= dechex(ord($ascii[$i]));
+            $hex .= str_pad(dechex(ord($ascii[$i])), 2, "0", STR_PAD_LEFT);
         }
 
         return new Base16($hex);
