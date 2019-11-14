@@ -17,6 +17,7 @@ namespace Comely\DataTypes;
 use Comely\DataTypes\BcMath\BaseConvert;
 use Comely\DataTypes\BcMath\BcMath;
 use Comely\DataTypes\Buffer\Base16;
+use Comely\DataTypes\Buffer\Bitwise;
 
 /**
  * Class BcNumber
@@ -150,7 +151,7 @@ class BcNumber
      */
     public function isInteger(): bool
     {
-        return preg_match('/^(\-)?(0|[1-9]+[0-9]*)$/', $this->value) ? true : false;
+        return preg_match('/^-?(0|[1-9]+[0-9]*)$/', $this->value) ? true : false;
     }
 
     /**
@@ -395,7 +396,23 @@ class BcNumber
      */
     public function encode(): Base16
     {
+        return $this->convertToBase16();
+    }
+
+    /**
+     * @return Base16
+     */
+    public function convertToBase16(): Base16
+    {
         return new Base16(BaseConvert::fromBase10($this, BaseConvert::CHARSET_BASE16));
+    }
+
+    /**
+     * @return Bitwise
+     */
+    public function convertToBitwise(): Bitwise
+    {
+        return new Bitwise(BaseConvert::fromBase10($this, BaseConvert::CHARSET_BINARY));
     }
 
     /**

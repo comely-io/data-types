@@ -23,9 +23,9 @@ use Comely\DataTypes\BcMath\BcMath;
 class DataTypes
 {
     /** string Version (Major.Minor.Release-Suffix) */
-    public const VERSION = "1.0.24";
+    public const VERSION = "1.0.30";
     /** int Version (Major * 10000 + Minor * 100 + Release) */
-    public const VERSION_ID = 10024;
+    public const VERSION_ID = 10030;
 
     /**
      * Checks is string is comprised of only 1s and 0s
@@ -64,7 +64,7 @@ class DataTypes
      */
     public static function isBase64($val): bool
     {
-        return is_string($val) && preg_match('/^[a-z0-9\+\/]+={0,2}$/i', $val) ? true : false;
+        return is_string($val) && preg_match('/^[a-z0-9+\/]+={0,2}$/i', $val) ? true : false;
     }
 
     /**

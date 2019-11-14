@@ -92,7 +92,7 @@ abstract class AbstractBuffer implements \Serializable
     public function unserialize($serialized)
     {
         // int readOnly + ":" + strlen( data ) + ":" + base64(data)
-        if (!is_string($serialized) || !preg_match('/^[0-1]{1}\:[0-9]+\:[a-z0-9\+\/]+={0,2}$/i', $serialized)) {
+        if (!is_string($serialized) || !preg_match('/^[0-1]:[0-9]+:[a-z0-9+\/]+={0,2}$/i', $serialized)) {
             throw new \InvalidArgumentException('Serialized data mismatch');
         }
 
