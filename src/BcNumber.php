@@ -396,13 +396,13 @@ class BcNumber
      */
     public function encode(): Base16
     {
-        return $this->convertToBase16();
+        return $this->toBase16();
     }
 
     /**
      * @return Base16
      */
-    public function convertToBase16(): Base16
+    public function toBase16(): Base16
     {
         return new Base16(BaseConvert::fromBase10($this, BaseConvert::CHARSET_BASE16));
     }
@@ -410,7 +410,7 @@ class BcNumber
     /**
      * @return Bitwise
      */
-    public function convertToBitwise(): Bitwise
+    public function toBitwise(): Bitwise
     {
         return new Bitwise(BaseConvert::fromBase10($this, BaseConvert::CHARSET_BINARY));
     }
