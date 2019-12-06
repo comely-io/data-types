@@ -151,7 +151,10 @@ abstract class AbstractBuffer implements \Serializable
      */
     public function set(?string $data = null)
     {
-        $this->setBufferData($this->validatedDataTypeValue($data));
+        if($data) {
+            $this->setBufferData($this->validatedDataTypeValue($data));
+        }
+
         return $this;
     }
 
