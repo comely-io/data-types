@@ -101,6 +101,20 @@ class ByteReader
     }
 
     /**
+     * @param int $pos
+     * @return $this
+     */
+    public function setPointer(int $pos): self
+    {
+        if ($pos < 0 || $pos > $this->len) {
+            throw new \RangeException('Invalid pointer position or is out of range');
+        }
+
+        $this->pointer = $pos;
+        return $this;
+    }
+
+    /**
      * @return string|null
      */
     public function remaining(): ?string
