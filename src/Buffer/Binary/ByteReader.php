@@ -22,12 +22,16 @@ use Comely\DataTypes\Buffer\Binary;
  */
 class ByteReader
 {
+    public const UNDERFLOW_EX_SIGNAL = 0x1f40;
+
     /** @var string */
     private $buffer;
     /** @var int */
     private $pointer;
     /** @var int */
     private $len;
+    /** @var bool */
+    private $throwUnderflowEx;
 
     /**
      * ByteReader constructor.
@@ -38,6 +42,7 @@ class ByteReader
         $this->buffer = $binary->raw() ?? "";
         $this->len = strlen($this->buffer);
         $this->pointer = 0;
+        $this->throwUnderflowEx = false;
     }
 
     /**
@@ -46,6 +51,15 @@ class ByteReader
     public function isEnd(): bool
     {
         return $this->pointer >= $this->len ? true : false;
+    }
+
+    /**
+     * @return $this
+     */
+    public function throwUnderflowEx(): self
+    {
+        $this->throwUnderflowEx = true;
+        return $this;
     }
 
     /**
@@ -91,10 +105,26 @@ class ByteReader
      */
     public function next(int $bytes): ?string
     {
+        if ($this->throwUnderflowEx) {
+            if (($this->pointer + $bytes) > $this->len) {
+                throw new \UnderflowException(
+                    sprintf('Attempt to read next %d bytes, while only %d available', $bytes, ($this->len - $this->pointer)),
+                    self::UNDERFLOW_EX_SIGNAL
+                );
+            }
+        }
+
         $read = substr($this->buffer, $this->pointer, $bytes);
         if ($read) {
             $this->pointer += $bytes;
             return $read;
+        }
+
+        if ($this->throwUnderflowEx) {
+            throw new \UnderflowException(
+                sprintf('ByteReader ran out of bytes at pos %d', $this->pointer),
+                self::UNDERFLOW_EX_SIGNAL
+            );
         }
 
         return null;
