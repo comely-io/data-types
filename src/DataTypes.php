@@ -64,7 +64,7 @@ class DataTypes
      */
     public static function isBase64($val): bool
     {
-        return is_string($val) && preg_match('/^[a-z0-9+\/]+={0,2}$/i', $val) ? true : false;
+        return is_string($val) && preg_match('/^[a-z0-9+\/]+={0,2}$/i', $val);
     }
 
     /**
@@ -78,7 +78,7 @@ class DataTypes
             return false;
         }
 
-        return strlen($val) !== mb_strlen($val) ? true : false;
+        return strlen($val) !== mb_strlen($val);
     }
 
     /**
