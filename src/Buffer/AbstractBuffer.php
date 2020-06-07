@@ -112,7 +112,7 @@ abstract class AbstractBuffer implements \Serializable
         }
 
         // ReadOnly flag
-        $this->readOnly = intval($splits[0]) === "1" ? true : false;
+        $this->readOnly = intval($splits[0]) === "1";
     }
 
     /**

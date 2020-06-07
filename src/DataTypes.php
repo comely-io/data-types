@@ -23,9 +23,9 @@ use Comely\DataTypes\BcMath\BcMath;
 class DataTypes
 {
     /** string Version (Major.Minor.Release-Suffix) */
-    public const VERSION = "1.0.33";
+    public const VERSION = "1.0.34";
     /** int Version (Major * 10000 + Minor * 100 + Release) */
-    public const VERSION_ID = 10033;
+    public const VERSION_ID = 10034;
 
     /**
      * Checks is string is comprised of only 1s and 0s
@@ -34,7 +34,7 @@ class DataTypes
      */
     public static function isBitwise($val): bool
     {
-        return is_string($val) && preg_match('/^[01]+$/', $val) ? true : false;
+        return is_string($val) && preg_match('/^[01]+$/', $val);
     }
 
     /**
@@ -44,7 +44,7 @@ class DataTypes
      */
     public static function isBase16($val): bool
     {
-        return is_string($val) && preg_match('/^(0x)?[a-f0-9]+$/i', $val) ? true : false;
+        return is_string($val) && preg_match('/^(0x)?[a-f0-9]+$/i', $val);
     }
 
     /**

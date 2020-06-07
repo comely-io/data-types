@@ -28,6 +28,6 @@ class Integers
      */
     public static function Range(int $num, int $from, int $to): bool
     {
-        return ($num >= $from && $num <= $to) ? true : false;
+        return ($num >= $from && $num <= $to);
     }
 }
