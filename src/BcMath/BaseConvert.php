@@ -78,13 +78,13 @@ class BaseConvert
 
             $div = bcdiv($num, $charsetLen, 0);
             $mod = bcmod($num, $charsetLen, 0);
-            $char = $charset{intval($mod)};
+            $char = $charset[intval($mod)];
             $encoded = $char . $encoded;
             $num = $div;
         }
 
         if (bccomp($num, "0", 0) !== -1) {
-            $encoded = $charset{intval($num)} . $encoded;
+            $encoded = $charset[intval($num)] . $encoded;
         }
 
         return $encoded;
